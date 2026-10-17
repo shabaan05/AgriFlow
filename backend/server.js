@@ -8,6 +8,7 @@ import cropRoutes from './routes/cropRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import aiRoutes from './routes/aiRoutes.js';
+import marketPriceRoutes from './routes/marketPriceRoutes.js';
 
 // Seed demo data helper
 import { seedInitialDataIfEmpty } from './seedData.js';
@@ -63,6 +64,7 @@ app.use('/api/crops', cropRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/ai', aiRoutes);
+app.use('/api/market-prices', marketPriceRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -90,6 +92,7 @@ const startServer = async () => {
       console.log(`   - Orders & Delivery: /api/orders`);
       console.log(`   - 6 AI Decision Hub: /api/ai`);
       console.log(`   - Blockchain Ledger: /api/ai/blockchain/ledger`);
+      console.log(`   - Mandi Prices:      /api/market-prices`);
       console.log(`=======================================================`);
     });
   } catch (error) {

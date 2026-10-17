@@ -8,13 +8,15 @@ import {
   ShieldCheck, 
   Calendar,
   AlertCircle,
-  ExternalLink
+  ExternalLink,
+  BarChart3
 } from 'lucide-react';
 import { useTranslation } from '../services/LanguageContext';
+import MandiPrices from './MandiPrices';
 
 export const BuyerPortal = ({ orders, bookings, user, darkMode }) => {
   const { t } = useTranslation();
-  const [activeSubTab, setActiveSubTab] = useState('orders'); // 'orders' | 'bookings'
+  const [activeSubTab, setActiveSubTab] = useState('orders'); // 'orders' | 'bookings' | 'mandi'
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -59,6 +61,17 @@ export const BuyerPortal = ({ orders, bookings, user, darkMode }) => {
             }`}
           >
             {t('preHarvestTab')} ({bookings?.length || 0})
+          </button>
+          <button
+            onClick={() => setActiveSubTab('mandi')}
+            className={`px-4 py-2 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+              activeSubTab === 'mandi'
+                ? 'bg-blue-600 text-white shadow-xs'
+                : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+            }`}
+          >
+            <BarChart3 className="w-3.5 h-3.5" />
+            Mandi Prices
           </button>
         </div>
       </div>
@@ -204,6 +217,11 @@ export const BuyerPortal = ({ orders, bookings, user, darkMode }) => {
             </div>
           )}
         </div>
+      )}
+
+      {/* ── Mandi Market Prices Tab ──────────────────────────────────── */}
+      {activeSubTab === 'mandi' && (
+        <MandiPrices darkMode={darkMode} />
       )}
     </div>
   );

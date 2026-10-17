@@ -140,5 +140,12 @@ export const api = {
       headers: { ...authHeaders(token) }
     });
     return res.json();
+  },
+
+  // Mandi Market Prices (data.gov.in proxy)
+  getMarketPrices: async (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    const res = await fetch(`${API_BASE}/market-prices${query ? `?${query}` : ''}`);
+    return res.json();
   }
 };
